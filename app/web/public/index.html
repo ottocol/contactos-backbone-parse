@@ -1,0 +1,36 @@
+<html>
+<head>
+  <style>
+  </style>
+</head>
+<body>
+  <h1>Tus contactos</h1>
+  <div id="agenda"></div>
+  <script id="agenda_template" type="text/x-handlebars-template">
+    <form>
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre">
+        </div>
+        <div>
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos">
+        </div>
+        <div>
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono">
+        </div>
+        <div>
+            <input type="button" id="boton_guardar" value="Guardar">
+            <input type="button" id="boton_anterior" value="Anterior">
+            <input type="button" id="boton_siguiente" value="Siguiente">
+            <input type="button" id="boton_nuevo" value="Nuevo">
+        </div>
+    </form>
+  </script>
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/zepto.min.js"></script>
+  <script src="js/lib/backbone-min.js"></script>
+  <script src="js/contactos.js"></script>
+</body>
+</html>
