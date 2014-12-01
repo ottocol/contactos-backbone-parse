@@ -1,40 +1,63 @@
 <html>
 <head>
   <style>
+      .contacto {
+          border: 1px solid;
+          border-radius: 5px;
+          padding: 1em;
+          margin: 1em;
+
+      }
   </style>
 </head>
 <body>
   <h1>Tus contactos</h1>
   <div id="agenda"></div>
-  <script id="agenda_template" type="text/x-handlebars-template">
-    <form>
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre">
-        </div>
-        <div>
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos">
-        </div>
-        <div>
-            <label for="telefono">Teléfono:</label>
-            <input type="text" id="telefono">
-        </div>
-        <div>
-            <input type="button" id="boton_guardar" value="Guardar">
-            <input type="button" id="boton_anterior" value="Anterior">
-            <input type="button" id="boton_siguiente" value="Siguiente">
-            <input type="button" id="boton_nuevo" value="Nuevo">
-        </div>
-    </form>
+
+
+  <!-- plantilla para la lista de contactos
+       En realidad solo contiene el formulario de alta de contacto
+       el listado se genera dinámicamente con JS -->
+  <script id="listado_tmpl" type="text/x-handlebars-template">
+      <label for="nombre_edit">Nombre:</label>
+      <input type="text" id="nombre"> <br>
+      <label for="apellidos_edit">Apellidos:</label>
+      <input type="text" id="apellidos"> <br>
+      <label for="telefono_edit">Teléfono:</label>
+      <input type="text" id="telefono"> <br>
+      <input type="button" id="boton_nuevo" value="Nuevo">
   </script>
+
+
+  <!-- plantilla para listar un único contacto -->
+  <script id="contacto_tmpl" type="text/x-handlebars-template">
+      <b>{{nombre}} {{apellidos}}</b> <br>
+      <em>{{telefono}}</em> <br>
+      <input type="button" class="boton_borrar" value="Borrar">
+      <input type="button" class="boton_editar" value="Editar">
+  </script>
+
+  <!-- plantilla para editar un único contacto -->
+  <script id="contacto_edit_tmpl" type="text/x-handlebars-template">
+      <label for="nombre_edit">Nombre:</label>
+      <input type="text" value="{{nombre}}" id="nombre_edit"> <br>
+      <label for="apellidos_edit">Apellidos:</label>
+      <input type="text" value="{{apellidos}}" id="apellidos_edit"> <br>
+      <label for="telefono_edit">Teléfono:</label>
+      <input type="text" value="{{telefono}}" id="telefono_edit"> <br>
+      <input type="button" class="boton_guardar" value="Guardar">
+  </script>
+
+
   <script src="js/lib/underscore-min.js"></script>
   <script src="js/lib/zepto.min.js"></script>
   <script src="js/lib/backbone-min.js"></script>
+  <script src="js/lib/mustache.js"></script>
   <script src="js/contactos.js"></script>
-  <script src="js/agenda_vista.js"></script>
+  <script src="js/agenda_listado.js"></script>
   <script>
-     agenda_vista = new AgendaVista()
+      lista_contactos = new ListaContactosVista();
+
   </script>
 </body>
 </html>
