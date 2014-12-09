@@ -55,7 +55,7 @@ var ContactoVista = Backbone.View.extend({
         this.model.set("apellidos", this.el.querySelector("#apellidos_edit").value)
         this.model.set("telefono", this.el.querySelector("#telefono_edit").value)
         //guardamos en el servidor
-        this.model.save()
+        this.model.guardar()
         editando = false
         //Pasamos a modo visualización
         this.render()
@@ -137,7 +137,7 @@ var ListaContactosVista = Backbone.View.extend({
         this.listenToOnce(nuevo_contacto, "sync",
             this.renderContacto.bind(this, nuevo_contacto))
         //ahora guardamos el contacto. Cuando se guarde OK se disparará el evento "sync"
-        nuevo_contacto.save()
+        nuevo_contacto.guardar()
     },
     events: {
         'click #boton_nuevo': 'nuevo'
