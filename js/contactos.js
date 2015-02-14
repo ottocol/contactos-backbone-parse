@@ -1,5 +1,6 @@
 var Contacto = Backbone.Model.extend({
-    urlRoot: '/api/contactos',
+    urlRoot: 'https://api.parse.com/1/classes/Contacto',
+    idAttribute: 'objectId',
     defaults: {
       "nombre": "",
       "apellidos": "",
@@ -42,7 +43,7 @@ var Contacto = Backbone.Model.extend({
 
 
 var Agenda = Backbone.Collection.extend({
-    url: '/api/contactos',
+    url: 'https://api.parse.com/1/classes/Contacto',
     model: Contacto,
     //Ejemplo de uso de la función "filter"
     //por ejemplo filtrar_por_nombre("Pep") nos devolvería
@@ -51,6 +52,9 @@ var Agenda = Backbone.Collection.extend({
         return this.filter(function(modelo) {
             return modelo.get('nombre').indexOf(cadena)>=0
         })
+    },
+    parse: function(response) {
+      return response.results;
     }
 })
 
