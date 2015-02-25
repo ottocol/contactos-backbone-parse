@@ -25,9 +25,8 @@ var ContactoVista = Backbone.View.extend({
         //1er parámetro: plantilla, 2º: objeto JSON con los datos
         //Aquí usamos el toJSON() de Backbone en vez del stringify estándar
         this.el.innerHTML = Mustache.render(this.template, this.model.toJSON())
-        //por convenio el "render" de backbone devuelve el "el"
-        //(recordemos: el nodo del que "cuelga" la vista)
-        return this.el
+        //por convenio el "render" de backbone devuelve this para poder encadenar llamadas al estilo jQuery
+        return this
     },
 
     //donde se genera el HTML de la vista en modo edición
@@ -35,7 +34,7 @@ var ContactoVista = Backbone.View.extend({
         this.el.innerHTML = Mustache.render(this.templateEdit, this.model.toJSON())
         //ponemos el foco de teclado en el campo de texto con el nombre
         document.getElementById("nombre_edit").focus()
-        return this.el
+        return this
     },
 
     //Se dispara al pulsar sobre el botón "editar" del contacto en modo visualización
@@ -62,7 +61,9 @@ var ContactoVista = Backbone.View.extend({
     },
 
     borrar: function() {
+      //borramos el modelo del servidor  
       this.model.destroy()
+      //borramos la vista
       this.remove()
     },
 
@@ -116,8 +117,8 @@ var ListaContactosVista = Backbone.View.extend({
         //Creamos una subvista para este contacto
         var contactoVista = new ContactoVista({model: contacto})
         //añadimos el HTML de la subvista a la vista "madre" (nosotros)
-        this.el.appendChild(contactoVista.render())
-        return this.el
+        this.$el.append(contactoVista.render().$el)
+        return this
     },
 
     //Disparado al pulsar sobre el botón de nuevo contacto

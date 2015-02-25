@@ -9,7 +9,7 @@ var Contacto = Backbone.Model.extend({
     //Se llama automáticamente al hacer save()
     //Si no hay errores de validación no debe devolver nada
     //Qué devolver exactamente si hay errores corre de cuenta de la aplicación
-    validate: function(attrs) {
+    validate: function(attrs, opts) {
         //En nuestro ejemplo devolvemos un array de mensajes de error
         var errores = [];
         if(!attrs.nombre)
