@@ -99,9 +99,7 @@ var ListaContactosVista = Backbone.View.extend({
         //"this" apuntará al objeto actual (esta vista)
         _.bindAll(this, "renderContacto")
         //Lo anterior también se podría hacer con JS estándar así:
-        //this.renderContacto = this.renderContacto.bind(this)
-        this.listenTo(this.collection, "sync", this.probatina.bind(this))
-    
+        //this.renderContacto = this.renderContacto.bind(this)    
     },
 
     probatina: function() {
@@ -151,8 +149,11 @@ var ListaContactosVista = Backbone.View.extend({
         //ahora guardamos el contacto. Cuando se guarde OK se disparará el evento "sync"
         nuevo_contacto.guardar()
     },
-    filtrar : function() {
-        var filtro = this.$('#nombre_filtro').val().trim();
+    filtrar : function(cadena) {
+        if (!cadena)
+            var filtro = this.$('#nombre_filtro').val().trim();
+        else
+            var filtro = cadena;
         if (filtro=='') {
             this.collection.reset(this.todos_collection.models, {silent:true});
         }
