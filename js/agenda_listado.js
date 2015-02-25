@@ -93,14 +93,25 @@ var ListaContactosVista = Backbone.View.extend({
         this.collection.fetch({reset:true})
         //Cuando se produzca el "reset", dibujamos la vista.
         //Antes la colección todavía no habrá llegado del servidor
-        this.listenTo(this.collection, "reset", this.render)
+        this.listenTo(this.collection, "reset", this.coleccionInicializada.bind(this))
         //Especificar qué significa "this" en la función renderContacto
         //El primer parámetro indica qué debe ser "this". O sea, en renderContacto,
         //"this" apuntará al objeto actual (esta vista)
         _.bindAll(this, "renderContacto")
         //Lo anterior también se podría hacer con JS estándar así:
         //this.renderContacto = this.renderContacto.bind(this)
+        this.listenTo(this.collection, "sync", this.probatina.bind(this))
+    
+    },
 
+    probatina: function() {
+        console.log("probatina!!")
+    },
+
+    coleccionInicializada: function() {
+        this.todos_collection = new Agenda();
+        this.todos_collection.add(this.collection.models);
+        this.render();
     },
 
     render: function() {
@@ -140,7 +151,17 @@ var ListaContactosVista = Backbone.View.extend({
         //ahora guardamos el contacto. Cuando se guarde OK se disparará el evento "sync"
         nuevo_contacto.guardar()
     },
+    filtrar : function() {
+        var filtro = this.$('#nombre_filtro').val().trim();
+        if (filtro=='') {
+            this.collection.reset(this.todos_collection.models, {silent:true});
+        }
+        else
+            this.collection.reset(this.todos_collection.filtrar_por_nombre(filtro), {silent: true})
+        this.render();
+    },
     events: {
-        'click #boton_nuevo': 'nuevo'
+        'click #boton_nuevo': 'nuevo',
+        'click #boton_filtrar' : 'filtrar'
     }
 })

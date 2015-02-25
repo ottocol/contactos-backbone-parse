@@ -50,7 +50,7 @@ var Agenda = Backbone.Collection.extend({
     //todos los contactos cuyo nombre contuviera esa cadena
     filtrar_por_nombre: function(cadena) {
         return this.filter(function(modelo) {
-            return modelo.get('nombre').indexOf(cadena)>=0
+            return (modelo.get('nombre').indexOf(cadena)>=0 || modelo.get('apellidos').indexOf(cadena)>=0)
         })
     },
     parse: function(response) {
