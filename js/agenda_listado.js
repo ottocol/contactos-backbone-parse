@@ -150,7 +150,7 @@ var ListaContactosVista = Backbone.View.extend({
         nuevo_contacto.guardar()
     },
     filtrar : function(cadena) {
-        if (!cadena)
+        if (typeof(cadena)!='string') 
             var filtro = this.$('#nombre_filtro').val().trim();
         else
             var filtro = cadena;
