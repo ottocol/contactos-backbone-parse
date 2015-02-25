@@ -62,14 +62,15 @@
   <script src="js/lib/backbone-min.js"></script>
   <script src="js/lib/mustache.js"></script>
   <script src="js/parse.js"></script>
-  <script src="js/router.js"></script>
   <script src="js/contactos.js"></script>
   <script src="js/agenda_listado.js"></script>
+  <script src="js/router.js"></script>
 
 
   <script>
       lista_contactos = new ListaContactosVista();
-
+      var mi_router = new MiRouter()
+      Backbone.history.start() 
   </script>
 </body>
 </html>
